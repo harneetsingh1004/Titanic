@@ -7,13 +7,12 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
-# Load the dataset
+# datdaset loading
 train_data = pd.read_csv('train.csv')
 test_data = pd.read_csv('test.csv')
 # Check the first few rows of the dataset
 train_data.head()
 
-# Summary statistics
 train_data.describe()
 
 # Check for missing values
@@ -22,7 +21,6 @@ train_data.isnull().sum()
 sns.countplot(x='Survived', hue='Sex', data=train_data)
 plt.show()
 
-# Survival rate by class
 sns.countplot(x='Survived', hue='Pclass', data=train_data)
 plt.show()
 
@@ -79,7 +77,9 @@ for c in missing_cols:
     test_data[c] = 0
 test_data = test_data[X.columns]
 
-# Make predictions
+#Predictions making....
+#test case
+
 test_predictions = rf.predict(test_data)
 submission = pd.DataFrame({'PassengerId': test_data['PassengerId'], 'Survived': test_predictions})
 submission.to_csv('submission.csv', index=False)
